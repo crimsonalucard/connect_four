@@ -58,7 +58,7 @@ def is_cell_empty(game_state: List[List[str]], column: int, row: int) -> bool:
     return 0 <= column < dimensions_x and 0 <= row < dimensions_y and game_state[row][column] is None
 
 
-# checks overall gamestate validity via three other functions.
+# checks overall game_state validity via three other functions.
 def is_game_valid(game_state: GameState) -> bool:
     return are_amount_of_pieces_valid(game_state) \
            and not are_there_pieces_with_empty_spots_below(game_state) \

@@ -9,7 +9,7 @@ def place_piece(game_state: GameState, piece: str, column: int) -> GameState:
         is_game_valid(game_state) and is_move_valid(game_state, column, row) else game_state
 
 
-# update the game state by copying it. O(n) do to immuteability.
+# update the game state by copying it. O(n) due to game_state being immutable.
 def update_game_state(game_state: GameState, piece: str, column: int, row: int) -> GameState:
     dimensions_y: int = len(game_state)
     dimensions_x: int = len(game_state[0])

@@ -5,7 +5,7 @@ from connect_four import GameState
 from connect_four.game_state_win_detection import is_n_in_a_row
 from connect_four.game_validity_checkers import count_pieces, is_game_valid
 from connect_four.move_methods import place_piece
-from connect_four.utils import clear_screen
+import connect_four.utils
 
 
 # initializes an empty game_state with dimensions: size x size
@@ -57,7 +57,7 @@ def show_game_state(game_state: GameState) -> None:
 # IO function, untestable (for manual testing)
 # allows you to play a game
 def game_loop(game_state) -> None:
-    clear_screen()
+    connect_four.utils.clear_screen()
     show_game_state(game_state)
     if not is_game_valid(game_state):
         print("Game state is not valid... exiting...")
