@@ -1,5 +1,5 @@
 from functools import reduce
-from typing import List, Union
+from typing import List, Union, Tuple
 
 from connect_four import GameState
 from connect_four.utils import flatten
@@ -18,7 +18,7 @@ def are_there_pieces_with_empty_spots_below(game_state: GameState) -> bool:
 
     dimensions_y: int = len(game_state)
     dimensions_x: int = len(game_state[0])
-    index_combinations: List[List[int]] = ((i, j) for i in range(dimensions_x) for j in range(dimensions_y))
+    index_combinations: List[Tuple[int, int]] = [(i, j) for i in range(dimensions_x) for j in range(dimensions_y)]
     return reduce(lambda acc, x: acc or does_piece_have_empty_space_below(game_state, *x), index_combinations, False)
 
 
@@ -59,7 +59,7 @@ def is_cell_empty(game_state: List[List[str]], column: int, row: int) -> bool:
 
 
 # checks overall game_state validity via three other functions.
-def is_game_valid(game_state: GameState) -> bool:
+def is_state_valid(game_state: GameState) -> bool:
     return are_amount_of_pieces_valid(game_state) \
            and not are_there_pieces_with_empty_spots_below(game_state) \
            and not are_there_invalid_pieces(game_state)

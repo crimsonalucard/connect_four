@@ -13,7 +13,7 @@ from connect_four.game_validity_checkers import \
     is_move_valid, are_there_invalid_pieces, \
     count_pieces, \
     is_cell_empty, \
-    is_game_valid
+    is_state_valid
 from connect_four.move_methods import \
     place_piece, \
     update_game_state, \
@@ -235,18 +235,18 @@ class TestMain(TestCase):
         self.assertTrue(are_there_invalid_pieces(self.game_state5a))
 
     def test_is_game_valid(self):
-        self.assertTrue(is_game_valid(self.game_state))
-        self.assertFalse(is_game_valid(self.game_state1))
-        self.assertTrue(is_game_valid(self.game_state2))
-        self.assertTrue(is_game_valid(self.game_state3))
-        self.assertFalse(is_game_valid(self.game_state4))
-        self.assertFalse(is_game_valid(self.game_state5))
-        self.assertTrue(is_game_valid(self.game_statea))
-        self.assertFalse(is_game_valid(self.game_state1a))
-        self.assertTrue(is_game_valid(self.game_state2a))
-        self.assertTrue(is_game_valid(self.game_state3a))
-        self.assertFalse(is_game_valid(self.game_state4a))
-        self.assertFalse(is_game_valid(self.game_state5a))
+        self.assertTrue(is_state_valid(self.game_state))
+        self.assertFalse(is_state_valid(self.game_state1))
+        self.assertTrue(is_state_valid(self.game_state2))
+        self.assertTrue(is_state_valid(self.game_state3))
+        self.assertFalse(is_state_valid(self.game_state4))
+        self.assertFalse(is_state_valid(self.game_state5))
+        self.assertTrue(is_state_valid(self.game_statea))
+        self.assertFalse(is_state_valid(self.game_state1a))
+        self.assertTrue(is_state_valid(self.game_state2a))
+        self.assertTrue(is_state_valid(self.game_state3a))
+        self.assertFalse(is_state_valid(self.game_state4a))
+        self.assertFalse(is_state_valid(self.game_state5a))
 
     def test_get_player_turn(self):
         self.assertEqual(get_player_turn(self.game_state), 'y')
@@ -398,7 +398,6 @@ class TestMain(TestCase):
             x = auto_play(x, i)
             x = auto_play(x, 0)
         self.assertTrue(does_game_have_a_winner(x))
-        show_game_state(x)
         x[5][0] = 'r'
         x[4][0] = 'y'
         self.assertFalse(does_game_have_a_winner(x))
@@ -409,7 +408,6 @@ class TestMain(TestCase):
             x = auto_play(x, 0)
         self.assertTrue(does_game_have_a_winner(x))
         x[4][0] = 'y'
-        show_game_state(x)
         self.assertFalse(does_game_have_a_winner(x))  # invalid game_state
         x[5][5] = 'r'
         self.assertTrue(does_game_have_a_winner(x))

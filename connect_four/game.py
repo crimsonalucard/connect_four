@@ -1,9 +1,9 @@
-from typing import List, Union
+from typing import List, Union, Tuple
 from functools import reduce
 
 from connect_four import GameState
 from connect_four.game_state_win_detection import is_n_in_a_row
-from connect_four.game_validity_checkers import count_pieces, is_game_valid
+from connect_four.game_validity_checkers import count_pieces, is_state_valid
 from connect_four.move_methods import place_piece
 import connect_four.utils
 
@@ -18,7 +18,7 @@ def init_game_state(size_y: int, size_x: int) -> GameState:
 def get_player_turn(game_state: GameState) -> Union[None, str]:
     amount_of_reds: int = count_pieces(game_state, 'r')
     amount_of_yellows: int = count_pieces(game_state, 'y')
-    return ('r' if amount_of_yellows > amount_of_reds else 'y') if is_game_valid(game_state) else None
+    return ('r' if amount_of_yellows > amount_of_reds else 'y') if is_state_valid(game_state) else None
 
 
 # automatically play the game based on which players turn. Will not do anything to the gamestate if it is invalid.
@@ -36,10 +36,10 @@ def play(game_state: GameState, column: int, piece: str) -> GameState:
 def does_game_have_a_winner(game_state: GameState) -> bool:
     dimensions_x: int = len(game_state)
     dimensions_y: int = len(game_state[0])
-    index_combinations: List[List[int]] = [(j, i) for i in range(dimensions_x) for j in range(dimensions_y)]
+    index_combinations: List[Tuple[int, int]] = [(j, i) for i in range(dimensions_x) for j in range(dimensions_y)]
     did_y_win = reduce(lambda acc, x: acc or is_n_in_a_row(game_state, 4, *x, piece='y'), index_combinations, False)
     did_r_win = reduce(lambda acc, x: acc or is_n_in_a_row(game_state, 4, *x, piece='r'), index_combinations, False)
-    return (did_y_win or did_r_win) and is_game_valid(game_state)
+    return (did_y_win or did_r_win) and is_state_valid(game_state)
 
 
 # IO function, untestable (for manual testing)
@@ -59,7 +59,7 @@ def show_game_state(game_state: GameState) -> None:
 def game_loop(game_state: GameState) -> None:
     connect_four.utils.clear_screen()
     show_game_state(game_state)
-    if not is_game_valid(game_state):
+    if not is_state_valid(game_state):
         print("Game state is not valid... exiting...")
         return None
     if does_game_have_a_winner(game_state):

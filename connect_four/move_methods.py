@@ -1,12 +1,12 @@
 from connect_four import GameState
-from connect_four.game_validity_checkers import is_move_valid, is_cell_empty, is_game_valid
+from connect_four.game_validity_checkers import is_move_valid, is_cell_empty, is_state_valid
 
 
 # place a piece at a column.
 def place_piece(game_state: GameState, piece: str, column: int) -> GameState:
     row: int = find_valid_empty_row(game_state, column)
     return update_game_state(game_state, piece, column, row) if \
-        is_game_valid(game_state) and is_move_valid(game_state, column, row) else game_state
+        is_state_valid(game_state) and is_move_valid(game_state, column, row) else game_state
 
 
 # update the game state by copying it. O(n) due to game_state being immutable.
