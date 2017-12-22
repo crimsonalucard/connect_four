@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 from connect_four.game import game_loop, init_game_state
 
 # runs the game loop.

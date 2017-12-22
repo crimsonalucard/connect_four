@@ -1,3 +1,3 @@
-from typing import List, Union
+import typing
 
-GameState = List[List[Union[None, str]]]
+GameState = typing.List[typing.List[typing.Union[None, str]]]
