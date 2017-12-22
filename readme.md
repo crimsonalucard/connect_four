@@ -1,3 +1,38 @@
+# Brian Yeh - Comments
+
+Thanks Brice for this assignment. I wrote two functions for manual QA: a 
+game loop function and a game state display function. You can run this 
+with python 3.6 by executing main.py in the root directory. 
+
+I wrote all the code in a purely functional style with type annotations using
+the pycharm IDE to catch all type errors. FYI I don't use this style of programming at work
+as purely functional programming is not considered pythonic and is an unconventional
+and less readable style. However, due to the freedom given in this assignment and 
+given the fact that I truly believe that this style allows for the building of 
+better programs with less bugs so I went with it. There is a slight cost of using 
+the functional style in that it is less efficient then imperative programming. 
+The biggest slowdown would be in recreating the game_state on every update.   
+
+Overall there were 3 main stages in writing this program which I used to filter
+out as many bugs as possible. 
+
+1. The first stage was to just code it using a functional style and type annotations.
+This step eliminates possibly 80% of bugs due to the style itself. I followed the 
+philosophy exemplified here: https://wiki.haskell.org/Why_Haskell_just_works 
+
+2. The second stage was to write unit tests for all the functions. Pure functional
+programming segments your code into many tiny micro functions allowing for in depth 
+and thorough coverage of every aspect of the program. The coding style of the tests was 
+imperative and due to that I spend 10x more time fixing bugs within the tests itself then
+I did with the actual program. 
+
+3. Write a program that plays the game. This allows me to run a manual end to end 
+test and catch any remaining bugs. If at any point I catch a bug I go back to step 2
+implement a unit test for it and continue. 
+
+
+
+
 # Connect Four
 
 The animation demonstrates Connect Four gameplay where the first player begins

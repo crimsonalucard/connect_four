@@ -166,9 +166,7 @@ class TestMain(TestCase):
                              [None, None, None, None, None, None, "r"],
                              [None, None, None, "r", "y", "r", "y"],
                              [None, None, None, "y", "r", "y", "r"],
-                             [None, None, None, "r", "r", "y", "y"]]
-
-        self.game_state6a
+                             ["y", None, None, "r", "r", "y", "y"]]
 
     def test_init_game_state(self):
         self.assertEqual(init_game_state(10, 10), self.game_state)
@@ -368,6 +366,7 @@ class TestMain(TestCase):
         self.game_state8a[5][6] = 'r'
         self.assertFalse(is_n_in_a_diag_row_left(self.game_state8a, 4, 3, 2, 'y'))
         self.game_state8a[5][6] = 'y'
+        self.assertTrue(is_n_in_a_diag_row_left(self.game_state9a, 4, 6, 2, 'r'))
 
     def test_is_n_in_a_row(self):
         x = init_game_state(6, 7)
@@ -391,6 +390,8 @@ class TestMain(TestCase):
         self.assertFalse(is_n_in_a_row(self.game_state8a, 4, 3, 2, 'y'))
         self.game_state8a[5][6] = 'y'
 
+        self.assertTrue(is_n_in_a_row(self.game_state9a, 4, 6, 2, 'r'))
+
     def test_does_game_have_a_winner(self):
         x = init_game_state(6, 7)
         for i in range(4):
@@ -413,7 +414,9 @@ class TestMain(TestCase):
         x[5][5] = 'r'
         self.assertTrue(does_game_have_a_winner(x))
 
-        self.assertTrue(is_n_in_a_row(self.game_state8a, 4, 3, 2, 'y'))
+        self.assertTrue(does_game_have_a_winner(self.game_state8a))
         self.game_state8a[5][6] = 'r'
-        self.assertFalse(is_n_in_a_row(self.game_state8a, 4, 3, 2, 'y'))
+        self.assertFalse(does_game_have_a_winner(self.game_state8a))
         self.game_state8a[5][6] = 'y'
+
+        self.assertTrue(does_game_have_a_winner(self.game_state9a))
