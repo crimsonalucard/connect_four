@@ -1,3 +1,6 @@
 venv
 .idea
 .mypy_cache
+.DS_Store
+connect_four/__pycache__/
+tests/__pycache__/
