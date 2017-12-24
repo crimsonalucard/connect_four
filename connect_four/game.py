@@ -38,56 +38,53 @@ def show_game_state(game_state: GameState) -> None:
     print(" ")
 
 
-# IO function, untestable (for manual testing)
-# allows you to play a game
-def game_loop(game_state: GameState) -> None:
-    connect_four.utils.clear_screen()
-    show_game_state(game_state)
-    if not is_state_valid(game_state):
-        print("Game state is not valid... exiting...")
-        return None
-    if does_game_have_a_winner(game_state):
-        print("Game is won.")
-        return None
-    player_turn: str = get_player_turn(game_state)
-    print("It is {0}'s turn. ".format(player_turn))
-    column: int = int(input("Enter a column: "))
-    game_loop(auto_play(game_state, column))
-
-
-"""
-# the algorithm will try to play a simulated game and attempt to reach the final game state. It will only
-# place pieces onto the simulated board if an identical piece already exists in the original game_state.
-
-example:
-Given a 4x4 game_state the following game is impossible if y moves first:
-[r, , , ]
-[r, , , ]
-[y, , , ]
-[y, , , ]
-while the following is valid:
-[ , , , ]
-[ , , , ]
-[ , , , ]
-[y,y,r,r]
-
-The algorithm below will be able to differentiate between such states. 
-
-Additionally the algorithm will check to see the game was continued to be played after someone won. This is also 
-considered invalid...
-So while this game is valid (y did the last move and won)
-[r, , , ]
-[r, , , ]
-[r, , , ]
-[y,y,y,y]
-This is not, because r moved after the game was won by y:
-[r, , , ]
-[r, , , ]
-[r, , ,r] <--- r's last move
-[y,y,y,y]
-"""
-
-
+# # IO function, untestable (for manual testing)
+# # allows you to play a game
+# def game_loop(game_state: GameState) -> None:
+#     connect_four.utils.clear_screen()
+#     show_game_state(game_state)
+#     if not is_state_valid(game_state):
+#         print("Game state is not valid... exiting...")
+#         return None
+#     if does_game_have_a_winner(game_state):
+#         print("Game is won.")
+#         return None
+#     player_turn: str = get_player_turn(game_state)
+#     print("It is {0}'s turn. ".format(player_turn))
+#     column: int = int(input("Enter a column: "))
+#     game_loop(auto_play(game_state, column))
+#
+#
+#
+# # the algorithm will try to play a simulated game and attempt to reach the final game state. It will only
+# # place pieces onto the simulated board if an identical piece already exists in the original game_state.
+#
+# example:
+# Given a 4x4 game_state the following game is impossible if y moves first:
+# [r, , , ]
+# [r, , , ]
+# [y, , , ]
+# [y, , , ]
+# while the following is valid:
+# [ , , , ]
+# [ , , , ]
+# [ , , , ]
+# [y,y,r,r]
+#
+# The algorithm below will be able to differentiate between such states.
+#
+# Additionally the algorithm will check to see the game was continued to be played after someone won. This is also
+# considered invalid...
+# So while this game is valid (y did the last move and won)
+# [r, , , ]
+# [r, , , ]
+# [r, , , ]
+# [y,y,y,y]
+# This is not, because r moved after the game was won by y:
+# [r, , , ]
+# [r, , , ]
+# [r, , ,r] <--- r's last move
+# [y,y,y,y]
 def is_state_valid(game_state: GameState) -> bool:
     dimension_x: int = len(game_state[0])
     dimension_y: int = len(game_state)
