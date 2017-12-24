@@ -7,12 +7,11 @@ from connect_four.game_support import does_game_have_a_winner, place_piece, coun
 import connect_four.utils
 
 
-# WARNING: RETURNS NONE. function will bypass type checkers.
 # returns the current players turn, given game_state
 def get_player_turn(game_state: GameState) -> Union[None, str]:
     amount_of_reds: int = count_pieces(game_state, 'r')
     amount_of_yellows: int = count_pieces(game_state, 'y')
-    return ('r' if amount_of_yellows > amount_of_reds else 'y') if is_state_valid(game_state) else None
+    return 'r' if amount_of_yellows > amount_of_reds else 'y'
 
 
 # automatically play the game based on which players turn. Will not do anything to the gamestate if it is invalid.

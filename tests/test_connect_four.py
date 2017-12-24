@@ -269,18 +269,19 @@ class TestMain(TestCase):
         self.assertFalse(is_state_valid(self.game_state5a))
 
     def test_get_player_turn(self):
+        # removed validation testing from get_player_turn
         self.assertEqual(get_player_turn(self.game_state), 'y')
-        self.assertIsNone(get_player_turn(self.game_state1))
+        # self.assertIsNone(get_player_turn(self.game_state1))
         self.assertEqual(get_player_turn(self.game_state2), 'r')
         self.assertEqual(get_player_turn(self.game_state3), 'y')
-        self.assertIsNone(get_player_turn(self.game_state4))
-        self.assertIsNone(get_player_turn(self.game_state5))
+        # self.assertIsNone(get_player_turn(self.game_state4))
+        # self.assertIsNone(get_player_turn(self.game_state5))
         self.assertEqual(get_player_turn(self.game_statea), 'y')
-        self.assertIsNone(get_player_turn(self.game_state1a))
+        # self.assertIsNone(get_player_turn(self.game_state1a))
         self.assertEqual(get_player_turn(self.game_state2a), 'r')
         self.assertEqual(get_player_turn(self.game_state3a), 'y')
-        self.assertIsNone(get_player_turn(self.game_state4a))
-        self.assertIsNone(get_player_turn(self.game_state5a))
+        # self.assertIsNone(get_player_turn(self.game_state4a))
+        # self.assertIsNone(get_player_turn(self.game_state5a))
 
     def test_find_valid_empty_row(self):
         self.assertEqual(find_valid_empty_row(self.game_state, 0), 9)
@@ -331,8 +332,9 @@ class TestMain(TestCase):
         for _ in range(30):
             y = auto_play(y, 9)
         self.assertEqual(y, self.game_state7)
-        w = auto_play(self.game_state1, 2)
-        self.assertEqual(w, self.game_state1)
+        # w = auto_play(self.game_state1, 2)
+        # self.assertEqual(w, self.game_state1)
+        # removed because validation testing was removed from auto_play
 
         x = init_game_state(6, 7)
         x = auto_play(x, 6)
@@ -344,8 +346,9 @@ class TestMain(TestCase):
             y = auto_play(y, 6)
 
         self.assertEqual(y, self.game_state7a)
-        w = auto_play(self.game_state1a, 2)
-        self.assertEqual(w, self.game_state1a)
+        # w = auto_play(self.game_state1a, 2)
+        # self.assertEqual(w, self.game_state1a)
+        # removed because validation testing was removed from auto_play
 
     def test_play(self):
         x = init_game_state(6, 7)
