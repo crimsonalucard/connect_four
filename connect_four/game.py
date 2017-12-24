@@ -53,9 +53,8 @@ def game_loop(game_state: GameState) -> None:
     print("It is {0}'s turn. ".format(player_turn))
     column: int = int(input("Enter a column: "))
     game_loop(auto_play(game_state, column))
-#
-#
-#
+
+
 # # the algorithm will try to play a simulated game and attempt to reach the final game state. It will only
 # # place pieces onto the simulated board if an identical piece already exists in the original game_state.
 #
