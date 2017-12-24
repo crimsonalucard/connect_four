@@ -84,6 +84,11 @@ def game_loop(game_state: GameState) -> None:
 # [r, , , ]
 # [r, , ,r] <--- r's last move
 # [y,y,y,y]
+#
+# The algorithm is a Depth first search type solution where each non-leaf node is an intermediate game_state and
+# each leaf node is a possible final game_state. If any of the possible final game_states equals the given game_state
+# then the given game_state is valid.
+# see: https://brilliant.org/wiki/depth-first-search-dfs/
 def is_state_valid(game_state: GameState) -> bool:
     dimension_x: int = len(game_state[0])
     dimension_y: int = len(game_state)
