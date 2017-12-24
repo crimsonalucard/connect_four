@@ -47,9 +47,6 @@ while the following is valid:
 
 The algorithm below will be able to differentiate between such states. 
 
-This algorithm exists seperate from the gameloop which uses a faster but not nearly as robust game_state. I did this 
-because the following function has an upper bound of O(n^m) for an mxn game_state
-
 Additionally the algorithm will check to see the game was continued to be played after someone won. This is also 
 considered invalid...
 So while this game is valid (y did the last move and won)
