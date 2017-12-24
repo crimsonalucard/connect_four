@@ -1,45 +1,19 @@
 # Brian Yeh - Comments
 
-Thanks Brice for this assignment. I wrote two functions for manual QA: a 
-game loop function and a game state display function. You can run this 
-with python 3.6 by executing main.py in the root directory. You can run the unit tests
-by running run_tests.sh (also in the root directory.) Please note that play() will not update the 
-state and does_game_have_a_winner will not return true if the state is invalid. You can continue
-reading for more details, but the above is all you really need to know.
+Thanks Brice for this assignment. 
+I wrote two functions for manual QA: a game loop function and a game state display function. You can run this 
+with python 3.6 by executing main.py in the root directory. 
 
+You can run the unit tests by running run_tests.sh (also in the root directory.) 
 
-#########################################################
+Please note that play() will not update the state if the state is invalid. The most expensive runtime algorithm is is_state_valid, see the
+comment above it for implementation details. 
 
-
-
-I wrote all the code in a purely functional style with type annotations using
-the pycharm IDE to catch all type errors. FYI I don't use this style of programming at work
-as purely functional programming is not considered pythonic and it's not a popular style. 
-However, due to the freedom given in this assignment and given the fact that I truly 
-believe that this style allows for the building of better programs with less bugs
-I decided to go with it. There is a slight cost of using the functional style in that 
-it is less efficient then imperative programming. The biggest slowdown would be in recreating 
-the game_state on every update.   
-
-Overall there were 3 main stages in writing this program which I used to filter
-out as many bugs as possible. 
-
-1. The first stage was to just code it using a functional style and type annotations.
-This step eliminates possibly 80% of bugs due to the style itself. I followed the 
-philosophy exemplified here: https://wiki.haskell.org/Why_Haskell_just_works 
-
-2. The second stage was to write unit tests for all the functions. Pure functional
-programming segments your code into many tiny micro functions allowing for in depth 
-and thorough coverage of every aspect of the program. Unlike the main program itself 
-the coding style of the tests was imperative and due to that, I spent 10x more time 
-fixing bugs within the tests then I did with the actual program. 
-
-3. Write a game loop that plays the game. This allows me to run a manual end to end 
-test and catch any remaining bugs. If at any point I catch a bug I go back to step 2
-implement a unit test for it and continue. 
-
-
-
+The is_state_valid function is the most expensive and complex function. I went through 2 different
+versions of this function during development. The initial version although O(n) will not find 
+all invalid configurations of game_state. The second version of that function is more robust
+(please see comment above the is_state_valid function for more info on it) but slower. You will
+see the obsolete is_game_state and support functions moved to the file obsolete_functions.py 
 
 # Connect Four
 

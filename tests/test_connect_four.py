@@ -1,30 +1,18 @@
 from unittest import TestCase
 from connect_four.game import \
-    init_game_state, \
     get_player_turn, \
     auto_play, \
     play, \
-    does_game_have_a_winner, \
-    show_game_state, \
-    is_state_configuration_valid
+    show_game_state
+from connect_four import init_game_state
 from connect_four.utils import flatten
-from connect_four.game_validity_checkers import \
-    are_there_pieces_with_empty_spots_below, \
-    are_amount_of_pieces_valid, \
+from connect_four.game_support import \
     is_move_valid, are_there_invalid_pieces, \
-    count_pieces, \
     is_cell_empty, \
-    is_state_valid
-from connect_four.move_methods import \
-    place_piece, \
-    update_game_state, \
-    find_valid_empty_row
-from connect_four.game_state_win_detection import \
-    is_n_in_a_diag_row_right, \
-    is_n_in_a_vertical_row, \
-    is_n_in_a_horizontal_row, \
-    is_n_in_a_row, \
-    is_n_in_a_diag_row_left
+    is_state_valid, is_state_valid, is_n_in_a_diag_row_left, is_n_in_a_diag_row_right, \
+    is_n_in_a_vertical_column, is_n_in_a_horizontal_row, is_n_in_a_row, does_game_have_a_winner, place_piece, \
+    update_game_state, find_valid_empty_row, count_pieces
+from connect_four.obsolete_functions import are_there_pieces_with_empty_spots_below, are_amount_of_pieces_valid
 
 
 class TestMain(TestCase):
@@ -188,6 +176,10 @@ class TestMain(TestCase):
                               [None, None, None, None],
                               ['y', None, None, None],
                               ['r', None, None, None]]
+        self.valid_game2 = [['r', None, None, None],
+                              ['r', None, None, None],
+                              ['r', None, None, 'y'],
+                              ['y', 'y', 'y', 'r']]
 
     def test_init_game_state(self):
         self.assertEqual(init_game_state(10, 10), self.game_state)
@@ -372,9 +364,9 @@ class TestMain(TestCase):
         for i in range(4):
             x = auto_play(x, i)
             x = auto_play(x, 0)
-        self.assertTrue(is_n_in_a_vertical_row(x, 4, 0, 1, 'r'))
+        self.assertTrue(is_n_in_a_vertical_column(x, 4, 0, 1, 'r'))
         x[4][0] = 'y'
-        self.assertFalse(is_n_in_a_vertical_row(x, 4, 0, 1, 'r'))
+        self.assertFalse(is_n_in_a_vertical_column(x, 4, 0, 1, 'r'))
 
     def test_is_n_in_a_diag_row_right(self):
         self.assertTrue(is_n_in_a_diag_row_right(self.game_state8a, 4, 3, 2, 'y'))
@@ -429,8 +421,10 @@ class TestMain(TestCase):
             x = auto_play(x, 0)
         self.assertTrue(does_game_have_a_winner(x))
         x[4][0] = 'y'
+        x[5][3] = 'r'
         self.assertFalse(does_game_have_a_winner(x))  # invalid game_state
         x[5][5] = 'r'
+        x[4][0] = 'r'
         self.assertTrue(does_game_have_a_winner(x))
 
         self.assertTrue(does_game_have_a_winner(self.game_state8a))
@@ -441,8 +435,9 @@ class TestMain(TestCase):
         self.assertTrue(does_game_have_a_winner(self.game_state9a))
 
     def test_is_state_configuration_valid(self):
-        self.assertFalse(is_state_configuration_valid(self.invalid_game))
-        self.assertTrue(is_state_configuration_valid(self.valid_game))
-        self.assertTrue(is_state_configuration_valid(self.valid_game1))
-        self.assertFalse(is_state_configuration_valid(self.invalid_game1))
-        self.assertFalse(is_state_configuration_valid(self.invalid_game2))
+        self.assertFalse(is_state_valid(self.invalid_game))
+        self.assertTrue(is_state_valid(self.valid_game))
+        self.assertTrue(is_state_valid(self.valid_game1))
+        self.assertFalse(is_state_valid(self.invalid_game1))
+        self.assertFalse(is_state_valid(self.invalid_game2))
+        self.assertTrue(is_state_valid(self.valid_game2))
