@@ -5,7 +5,8 @@ from connect_four.game import \
     auto_play, \
     play, \
     does_game_have_a_winner, \
-    show_game_state
+    show_game_state, \
+    is_state_configuration_valid
 from connect_four.utils import flatten
 from connect_four.game_validity_checkers import \
     are_there_pieces_with_empty_spots_below, \
@@ -167,6 +168,26 @@ class TestMain(TestCase):
                              [None, None, None, "r", "y", "r", "y"],
                              [None, None, None, "y", "r", "y", "r"],
                              ["y", None, None, "r", "r", "y", "y"]]
+        self.invalid_game = [['r', None, None, None],
+                             ['r', None, None, None],
+                             ['y', None, None, None],
+                             ['y', None, None, None]]
+        self.valid_game = [[None, None, None, None],
+                           [None, None, None, None],
+                           [None, None, None, None],
+                           ['y', 'y', 'r', 'r']]
+        self.valid_game1 = [['r', None, None, None],
+                           ['r', None, None, None],
+                           ['r', None, None, None],
+                           ['y', 'y', 'y', 'y']]
+        self.invalid_game1 = [['r', None, None, None],
+                             ['r', None, None, None],
+                             ['r', None, None, 'r'],
+                             ['y', 'y', 'y', 'y']]
+        self.invalid_game2 = [[None, None, None, None],
+                              [None, None, None, None],
+                              ['y', None, None, None],
+                              ['r', None, None, None]]
 
     def test_init_game_state(self):
         self.assertEqual(init_game_state(10, 10), self.game_state)
@@ -418,3 +439,10 @@ class TestMain(TestCase):
         self.game_state8a[5][6] = 'y'
 
         self.assertTrue(does_game_have_a_winner(self.game_state9a))
+
+    def test_is_state_configuration_valid(self):
+        self.assertFalse(is_state_configuration_valid(self.invalid_game))
+        self.assertTrue(is_state_configuration_valid(self.valid_game))
+        self.assertTrue(is_state_configuration_valid(self.valid_game1))
+        self.assertFalse(is_state_configuration_valid(self.invalid_game1))
+        self.assertFalse(is_state_configuration_valid(self.invalid_game2))

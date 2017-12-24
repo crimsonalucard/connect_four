@@ -18,6 +18,7 @@ def update_game_state(game_state: GameState, piece: str, column: int, row: int) 
 
 
 # find the correct row the piece will land into when dropped at a column
+# returns -1 which can cause errors if used in indexes.
 def find_valid_empty_row(game_state: GameState, column: int) -> int:
     def inner(game_state_inner: GameState, column_inner: int, row: int) -> int:
         is_current_cell_empty: bool = is_cell_empty(game_state_inner, column_inner, row)
