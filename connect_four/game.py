@@ -80,15 +80,14 @@ def game_loop(game_state: GameState) -> None:
 # [r, , , ]
 # [y,y,y,y]
 # This is not, because r moved after the game was won by y:
+# [r, , , ] <--- r's last move is here
 # [r, , , ]
-# [r, , , ]
-# [r, , ,r] <--- r's last move
+# [r, , ,r] <---  or here, either way these two possible moves are invalid because they are conducted after a win.
 # [y,y,y,y]
 #
-# The algorithm is a Depth first search type solution where each non-leaf node is an intermediate game_state and
-# each leaf node is a possible final game_state. If any of the possible final game_states equals the given game_state
-# then the given game_state is valid.
-# see: https://brilliant.org/wiki/depth-first-search-dfs/
+# The algorithm is a recursive Depth first search type solution to a tree where each non-leaf node is an
+# intermediate game_state and each leaf node is a possible final game_state. If any of the possible final game_states
+# equals the given game_state then the given game_state is valid.
 def is_state_valid(game_state: GameState) -> bool:
     dimension_x: int = len(game_state[0])
     dimension_y: int = len(game_state)
