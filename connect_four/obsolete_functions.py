@@ -1,7 +1,7 @@
 from functools import reduce
 from typing import List, Tuple, Union
 
-from connect_four import GameState
+from connect_four import GameState, player
 from connect_four.utils import flatten
 
 
@@ -40,7 +40,7 @@ def is_state_valid_obsolete(game_state: GameState) -> bool:
 
 
 # counts the amount of the given piece in the game.
-def count_pieces_obsolete(game_state: GameState, piece: str) -> int:
+def count_pieces_obsolete(game_state: GameState, piece: player) -> int:
     return reduce(lambda acc, i: acc + 1 if i == piece else acc, flatten(game_state), 0)
 
 

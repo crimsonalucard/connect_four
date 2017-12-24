@@ -1,14 +1,14 @@
 from functools import reduce
 from typing import Union, List, Tuple
 
-from connect_four import GameState, init_game_state
+from connect_four import GameState, init_game_state, player
 from connect_four.game_support import does_game_have_a_winner, place_piece, count_pieces, find_valid_empty_row, \
     update_game_state, are_there_invalid_pieces
 import connect_four.utils
 
 
 # returns the current players turn, given game_state
-def get_player_turn(game_state: GameState) -> Union[None, str]:
+def get_player_turn(game_state: GameState) -> player:
     amount_of_reds: int = count_pieces(game_state, 'r')
     amount_of_yellows: int = count_pieces(game_state, 'y')
     return 'r' if amount_of_yellows > amount_of_reds else 'y'
@@ -21,7 +21,7 @@ def auto_play(game_state: GameState, column: int) -> GameState:
 
 
 # play function that doesn't do anything if piece parameter does not equal current players' turn.
-def play(game_state: GameState, column: int, piece: str) -> GameState:
+def play(game_state: GameState, column: int, piece: player) -> GameState:
     return auto_play(game_state, column) if piece == get_player_turn(game_state) else game_state
 
 
@@ -91,7 +91,7 @@ def is_state_valid(game_state: GameState) -> bool:
     dimension_x: int = len(game_state[0])
     dimension_y: int = len(game_state)
 
-    def _is_state_valid(game_state_inner: GameState, test_game_state: GameState, piece: str,
+    def _is_state_valid(game_state_inner: GameState, test_game_state: GameState, piece: player,
                         was_last_game_won: bool) -> bool:
         dimension_x_inner: int = len(game_state_inner[0])
         open_positions: List[Tuple[int, int]] = [(column, find_valid_empty_row(test_game_state, column)) for

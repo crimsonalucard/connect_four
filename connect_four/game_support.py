@@ -1,7 +1,7 @@
 from functools import reduce
 from typing import List, Union, Tuple
 
-from connect_four import GameState
+from connect_four import GameState, player
 from connect_four.utils import flatten
 
 
@@ -30,7 +30,7 @@ def is_cell_empty(game_state: List[List[str]], column: int, row: int) -> bool:
 
 
 # checks from index if there is a winning diagonal row that goes down and left
-def is_n_in_a_diag_row_left(game_state: GameState, n: int, column: int, row: int, piece: str) -> bool:
+def is_n_in_a_diag_row_left(game_state: GameState, n: int, column: int, row: int, piece: player) -> bool:
     dimensions_y: int = len(game_state)
     dimensions_x: int = len(game_state[0])
     if column < 0 or column >= dimensions_x or row < 0 or row >= dimensions_y:
@@ -43,7 +43,7 @@ def is_n_in_a_diag_row_left(game_state: GameState, n: int, column: int, row: int
 
 
 # checks from index if there is a winning diagonal row that goes down and right
-def is_n_in_a_diag_row_right(game_state: GameState, n: int, column: int, row: int, piece: str) -> bool:
+def is_n_in_a_diag_row_right(game_state: GameState, n: int, column: int, row: int, piece: player) -> bool:
     dimensions_y: int = len(game_state)
     dimensions_x: int = len(game_state[0])
     if column < 0 or column >= dimensions_x or row < 0 or row >= dimensions_y:
@@ -56,7 +56,7 @@ def is_n_in_a_diag_row_right(game_state: GameState, n: int, column: int, row: in
 
 
 # checks from index if there is a winning column that goes down
-def is_n_in_a_vertical_column(game_state: GameState, n: int, column: int, row: int, piece: str) -> bool:
+def is_n_in_a_vertical_column(game_state: GameState, n: int, column: int, row: int, piece: player) -> bool:
     dimensions_y: int = len(game_state)
     dimensions_x: int = len(game_state[0])
     if column < 0 or column >= dimensions_x or row < 0 or row >= dimensions_y:
@@ -68,7 +68,7 @@ def is_n_in_a_vertical_column(game_state: GameState, n: int, column: int, row: i
 
 
 # checks from index if there is a winning row that goes right
-def is_n_in_a_horizontal_row(game_state: GameState, n: int, column: int, row: int, piece: str) -> bool:
+def is_n_in_a_horizontal_row(game_state: GameState, n: int, column: int, row: int, piece: player) -> bool:
     dimensions_y: int = len(game_state)
     dimensions_x: int = len(game_state[0])
     if column < 0 or column >= dimensions_x or row < 0 or row >= dimensions_y:
@@ -81,7 +81,7 @@ def is_n_in_a_horizontal_row(game_state: GameState, n: int, column: int, row: in
 
 
 # checks from index if there is a winning right row, down column, or left-down diagonal or right down-diagonal
-def is_n_in_a_row(game_state: GameState, n: int, column: int, row: int, piece: str) -> bool:
+def is_n_in_a_row(game_state: GameState, n: int, column: int, row: int, piece: player) -> bool:
     return is_n_in_a_horizontal_row(game_state, n, column, row, piece) or \
            is_n_in_a_vertical_column(game_state, n, column, row, piece) or \
            is_n_in_a_diag_row_right(game_state, n, column, row, piece) or \
@@ -128,5 +128,5 @@ def find_valid_empty_row(game_state: GameState, column: int) -> int:
 
 
 # counts the amount of the given piece in the game.
-def count_pieces(game_state: GameState, piece: str) -> int:
+def count_pieces(game_state: GameState, piece: player) -> int:
     return reduce(lambda acc, i: acc + 1 if i == piece else acc, flatten(game_state), 0)
