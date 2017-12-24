@@ -38,21 +38,21 @@ def show_game_state(game_state: GameState) -> None:
     print(" ")
 
 
-# # IO function, untestable (for manual testing)
-# # allows you to play a game
-# def game_loop(game_state: GameState) -> None:
-#     connect_four.utils.clear_screen()
-#     show_game_state(game_state)
-#     if not is_state_valid(game_state):
-#         print("Game state is not valid... exiting...")
-#         return None
-#     if does_game_have_a_winner(game_state):
-#         print("Game is won.")
-#         return None
-#     player_turn: str = get_player_turn(game_state)
-#     print("It is {0}'s turn. ".format(player_turn))
-#     column: int = int(input("Enter a column: "))
-#     game_loop(auto_play(game_state, column))
+# IO function, untestable (for manual testing)
+# allows you to play a game
+def game_loop(game_state: GameState) -> None:
+    connect_four.utils.clear_screen()
+    show_game_state(game_state)
+    if not is_state_valid(game_state):
+        print("Game state is not valid... exiting...")
+        return None
+    if does_game_have_a_winner(game_state):
+        print("Game is won.")
+        return None
+    player_turn: str = get_player_turn(game_state)
+    print("It is {0}'s turn. ".format(player_turn))
+    column: int = int(input("Enter a column: "))
+    game_loop(auto_play(game_state, column))
 #
 #
 #
