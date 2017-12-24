@@ -90,8 +90,9 @@ def is_state_valid(game_state: GameState) -> bool:
                                                       x[0]),
                 zip(did_game_wins, updated_game_states), False)
 
-    return _is_state_valid(game_state, init_game_state(dimension_y, dimension_x), 'y', False) and \
-        not are_there_invalid_pieces(game_state)
+    return not are_there_invalid_pieces(game_state) and _is_state_valid(game_state,
+                                                                        init_game_state(dimension_y, dimension_x), 'y',
+                                                                        False)
 
 
 # checks from index if there is a winning diagonal row that goes down and left
