@@ -9,8 +9,6 @@ You can run the unit tests by running run_tests.sh (also in the root directory.)
 type annotations are used for everything except tests. Run 'mypy main.py' to verify type
 correctness. 
 
-Please note that play() will not update the state if the state is invalid.
-
 The is_state_valid function is the most expensive and complex function. I went through 2 different
 versions of this function during development. The initial version although O(n) will not find 
 all invalid configurations of game_state. The second version of that function is more robust

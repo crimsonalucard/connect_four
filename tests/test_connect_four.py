@@ -3,15 +3,22 @@ from connect_four.game import \
     get_player_turn, \
     auto_play, \
     play, \
-    show_game_state
+    is_state_valid
 from connect_four import init_game_state
 from connect_four.utils import flatten
 from connect_four.game_support import \
     is_move_valid, are_there_invalid_pieces, \
     is_cell_empty, \
-    is_state_valid, is_state_valid, is_n_in_a_diag_row_left, is_n_in_a_diag_row_right, \
-    is_n_in_a_vertical_column, is_n_in_a_horizontal_row, is_n_in_a_row, does_game_have_a_winner, place_piece, \
-    update_game_state, find_valid_empty_row, count_pieces
+    is_n_in_a_diag_row_left, \
+    is_n_in_a_diag_row_right, \
+    is_n_in_a_vertical_column, \
+    is_n_in_a_horizontal_row, \
+    is_n_in_a_row, \
+    does_game_have_a_winner, \
+    place_piece, \
+    update_game_state, \
+    find_valid_empty_row, \
+    count_pieces
 from connect_four.obsolete_functions import are_there_pieces_with_empty_spots_below, are_amount_of_pieces_valid
 
 
@@ -165,21 +172,21 @@ class TestMain(TestCase):
                            [None, None, None, None],
                            ['y', 'y', 'r', 'r']]
         self.valid_game1 = [['r', None, None, None],
-                           ['r', None, None, None],
-                           ['r', None, None, None],
-                           ['y', 'y', 'y', 'y']]
+                            ['r', None, None, None],
+                            ['r', None, None, None],
+                            ['y', 'y', 'y', 'y']]
         self.invalid_game1 = [['r', None, None, None],
-                             ['r', None, None, None],
-                             ['r', None, None, 'r'],
-                             ['y', 'y', 'y', 'y']]
+                              ['r', None, None, None],
+                              ['r', None, None, 'r'],
+                              ['y', 'y', 'y', 'y']]
         self.invalid_game2 = [[None, None, None, None],
                               [None, None, None, None],
                               ['y', None, None, None],
                               ['r', None, None, None]]
         self.valid_game2 = [['r', None, None, None],
-                              ['r', None, None, None],
-                              ['r', None, None, 'y'],
-                              ['y', 'y', 'y', 'r']]
+                            ['r', None, None, None],
+                            ['r', None, None, 'y'],
+                            ['y', 'y', 'y', 'r']]
 
     def test_init_game_state(self):
         self.assertEqual(init_game_state(10, 10), self.game_state)
@@ -303,14 +310,16 @@ class TestMain(TestCase):
         x = place_piece(x, 'y', 7)
         self.assertEqual(x, self.game_state2)
         y = place_piece(self.game_state1, 'y', 2)
-        self.assertEqual(y, self.game_state1)
+        # self.assertEqual(y, self.game_state1)
+        # game validation should happen at a higher level of abstraction. During the gameloop.
 
         x = place_piece(self.game_statea, 'y', 6)
         x = place_piece(x, 'r', 5)
         x = place_piece(x, 'y', 4)
         self.assertEqual(x, self.game_state2a)
-        y = place_piece(self.game_state1a, 'y', 2)
-        self.assertEqual(y, self.game_state1a)
+        # y = place_piece(self.game_state1a, 'y', 2)
+        # self.assertEqual(y, self.game_state1a) #test place_piece validation checker. (I took this out).
+        # game validation should happen at a higher level of abstraction. During the gameloop.
 
     def test_auto_play(self):
         x = init_game_state(10, 10)
@@ -459,5 +468,3 @@ class TestMain(TestCase):
         self.assertTrue(is_state_valid(self.game_state7a))
         self.assertTrue(is_state_valid(self.game_state8a))
         self.assertTrue(is_state_valid(self.game_state9a))
-
-
