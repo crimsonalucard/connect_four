@@ -1,5 +1,6 @@
 from functools import reduce
 from typing import Union, List, Tuple
+from time import sleep
 
 from connect_four import GameState, init_game_state, player
 from connect_four.game_support import does_game_have_a_winner, place_piece, count_pieces, find_valid_empty_row, \
@@ -87,16 +88,22 @@ def game_loop(game_state: GameState) -> None:
 # The algorithm is a recursive Depth first search type solution to a tree where each non-leaf node is an
 # intermediate game_state and each leaf node is a possible final game_state. If any of the possible final game_states
 # equals the given game_state then the given game_state is valid.
-# O(n^m) for m x n game_state (very expensive)
+# O(n^m) is the upper bound for an m x n game_state (very expensive)
 def is_state_valid(game_state: GameState) -> bool:
     dimension_x: int = len(game_state[0])
     dimension_y: int = len(game_state)
+
     def _is_state_valid(game_state_inner: GameState, test_game_state: GameState, piece: player,
                         was_last_game_won: bool) -> bool:
 
-        # uncomment out the 3 lines below to display the search process.
-        # print("Searching...")
+        # uncomment out the lines below to display visualization of this algorithm.
+
+        # print("is_state_valid: Searching...")
+        # print("\ntest game:")
         # show_game_state(test_game_state)
+        # print("\ngoal state:")
+        # show_game_state(game_state_inner)
+        # sleep(0.25)
         # connect_four.utils.clear_screen()
 
         dimension_x_inner: int = len(game_state_inner[0])
