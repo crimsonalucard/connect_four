@@ -87,12 +87,18 @@ def game_loop(game_state: GameState) -> None:
 # The algorithm is a recursive Depth first search type solution to a tree where each non-leaf node is an
 # intermediate game_state and each leaf node is a possible final game_state. If any of the possible final game_states
 # equals the given game_state then the given game_state is valid.
+# O(n^m) for m x n game_state (very expensive)
 def is_state_valid(game_state: GameState) -> bool:
     dimension_x: int = len(game_state[0])
     dimension_y: int = len(game_state)
-
     def _is_state_valid(game_state_inner: GameState, test_game_state: GameState, piece: player,
                         was_last_game_won: bool) -> bool:
+
+        # uncomment out the 3 lines below to display the search process.
+        # print("Searching...")
+        # show_game_state(test_game_state)
+        # connect_four.utils.clear_screen()
+
         dimension_x_inner: int = len(game_state_inner[0])
         open_positions: List[Tuple[int, int]] = [(column, find_valid_empty_row(test_game_state, column)) for
                                                  column in
