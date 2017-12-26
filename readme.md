@@ -13,7 +13,7 @@ The is_state_valid function is the most expensive and complex function. I went t
 versions of this function during development. The initial version although O(n) will not find 
 all invalid configurations of game_state. The second version of that function is more robust
 (please see comment above the is_state_valid function for more info on it) but slower. You will
-see the obsolete is_game_state and support functions moved to the file obsolete_functions.py 
+see the obsolete is_game_state and support functions moved to the file obsolete_functions.py  
 
 # Connect Four
 
